@@ -1,11 +1,30 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, Pressable, View, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  FlatList,
+} from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import BlockRGB from "./components/BlockRGB";
 
 function HomeScreen({ navigation }) {
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <Button onPress={addColor} title="Add colour" />,
+    });
+  });
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <Button onPress={resetColors} title="Reset Colours" />,
+    });
+  });
+
   const [colorArray, setColorArray] = useState([
     { red: 255, green: 0, blue: 0, id: "0" },
     { red: 0, green: 255, blue: 0, id: "1" },
@@ -41,18 +60,18 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Pressable
+      {/* <Pressable
         style={{ height: 40, justifyContent: "center" }}
         onPress={addColor}
       >
         <Text style={{ color: "red" }}>Add colour</Text>
-      </Pressable>
-      <Pressable
+      </Pressable> */}
+      {/* <Pressable
         style={{ height: 40, justifyContent: "center" }}
         onPress={resetColors}
       >
         <Text style={{ color: "red" }}>Reset</Text>
-      </Pressable>
+      </Pressable> */}
       <FlatList
         style={{ width: "100%" }}
         data={colorArray}

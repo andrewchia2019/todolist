@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as SQLite from "expo-sqlite";
 import NotesStack from "./screens/NotesStack";
 import AddScreen from "./screens/AddScreen";
+import NoteDetailScreen from "./screens/NoteDetailScreen";
 
 const db = SQLite.openDatabase("notes.db");
 
@@ -20,6 +21,7 @@ export default function App() {
           options={{ headerShown: false, headerMode: false }}
         />
         <Stack.Screen name="Add Note" component={AddScreen} />
+        <Stack.Screen name="NoteDetail" component={NoteDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

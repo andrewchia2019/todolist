@@ -27,7 +27,7 @@ export default function NotesScreen({ navigation, route }) {
             notes
             (id INTEGER PRIMARY KEY AUTOINCREMENT,
               title TEXT,
-              done INT);
+              done INT DEFAULT);
             `
         );
       },
@@ -80,23 +80,29 @@ export default function NotesScreen({ navigation, route }) {
   }
 
   function renderItem({ item }) {
+    const navigateToDetailScreen = () => {
+      navigation.navigate("NoteDetail", { note: item });
+    };
+
     return (
-      <View
-        style={{
-          padding: 10,
-          paddingTop: 20,
-          paddingBottom: 20,
-          borderBottomColor: "#ccc",
-          borderBottomWidth: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Text style={{ textAlign: "left", fontSize: 16 }}>{item.title}</Text>
-        <Pressable onPress={() => deleteNotes(item.id)}>
-          <Entypo name="trash" size={24} color="blue" />
-        </Pressable>
-      </View>
+      <Pressable onPress={navigateToDetailScreen}>
+        <View
+          style={{
+            padding: 10,
+            paddingTop: 20,
+            paddingBottom: 20,
+            borderBottomColor: "#ccc",
+            borderBottomWidth: 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text style={{ textAlign: "left", fontSize: 16 }}>{item.title}</Text>
+          <Pressable onPress={() => deleteNotes(item.id)}>
+            <Entypo name="trash" size={24} color="blue" />
+          </Pressable>
+        </View>
+      </Pressable>
     );
   }
 
